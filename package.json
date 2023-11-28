@@ -1,0 +1,13 @@
+{
+  "name": "panwine-10",
+  "version": "1.0.0",
+  "description": "rest api for ecommerce",
+  "main": "index.js",
+  "repository": "https://github.com/Ayosnowchild/panwine-server10.0.git",
+  "author": "Ayosnowchild",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  }
+}
