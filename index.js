@@ -8,6 +8,7 @@ const {
   updateById,
   deleteById,
 } = require("./controllers/product.controller");
+const { CreateShipping } = require("./controllers/shipping.controller");
 
 const PORT = 6969;
 
@@ -43,7 +44,9 @@ server.put("/product/:id", updateById);
 
 server.delete("/product/:id", deleteById);
 
-server.get("*", (req, res) => {
+server.post("/shipping", CreateShipping);
+
+server.all("*", (req, res) => {
   try {
     res.status(200).send({
       message: "route does not exist",
