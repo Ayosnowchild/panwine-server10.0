@@ -137,7 +137,7 @@ server.all("*", (req, res) => {
 server.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/panwine10");
+    await mongoose.connect(process.env.DB_URL);
     console.log("mongodb connected");
   } catch (err) {
     console.log(err);
