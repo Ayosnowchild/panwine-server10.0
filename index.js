@@ -16,7 +16,7 @@ const { isTokenValid } = require("./controllers/validators/auth.validators.js");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 require("./passport.js");
 
-const PORT = 6969;
+const PORT = process.env.PORT || 6969;
 server.use(
   session({
     secret: process.env.SESSION_SECRET, // session secret
