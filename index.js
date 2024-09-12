@@ -13,6 +13,12 @@ const session = require("express-session");
 const passport = require("passport");
 const { User } = require("./model/user.model.js");
 const { isTokenValid } = require("./controllers/validators/auth.validators.js");
+const {
+  createBlog,
+  fetchBlogById,
+  fetchAllBlog,
+  fetchUserById,
+} = require("./controllers/blog.controller.js");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 require("./passport.js");
 
@@ -78,9 +84,15 @@ server.get(
       });
       const token = googleUser.generateToken();
       await googleUser.save();
-      res
-        .status(201)
-        .json({ message: "signup successful", user: googleUser, token });
+      res.status(201).json({
+        message: "signup successful",
+        user: {
+          fullname: googleUser.fullname,
+          email: googleUser.email,
+          phone: googleUser.phone,
+        },
+        token,
+      });
     }
   }
 );
@@ -97,17 +109,13 @@ server.get("/user/profile/:id", isTokenValid, async (req, res) => {
   }
 });
 
-server.post("/product", createProduct);
+server.post("/blog", createBlog);
 
-server.get("/product/:id", fetchProductById);
+server.get("/blog/:id", fetchBlogById);
 
-server.get("/product", fetchAllProduct);
+server.get("/user/:id", fetchUserById);
 
-server.put("/product/:id", updateById);
-
-server.delete("/product/:id", deleteById);
-
-server.post("/shipping", CreateShipping);
+server.get("/blog", fetchAllBlog);
 
 server.all("/", (req, res) => {
   try {
